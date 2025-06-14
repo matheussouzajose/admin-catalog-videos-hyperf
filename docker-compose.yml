@@ -1,0 +1,17 @@
+services:
+  app-admin-catalog-video:
+    container_name: app-admin-catalog-video
+    image: app-admin-catalog-video
+    build:
+      context: .
+    volumes:
+      - ./:/opt/www
+    ports:
+      - "9501:9501"
+    environment:
+      - APP_ENV=dev
+      - SCAN_CACHEABLE=false
+
+networks:
+  admin-catalog-video:
+    driver: bridge

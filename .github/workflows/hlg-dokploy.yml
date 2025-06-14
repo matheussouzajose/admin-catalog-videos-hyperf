@@ -1,0 +1,50 @@
+name: HLG - Build and Deploy Admin to Dokploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+  deployments: write
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  id-token: write
+
+env:
+  DOKPLOY_URL: "https://dokploy.msjtech.me/"
+  IMAGE: "registry.msjtech.me/app-admin-catalog-video"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login no Registry Privado
+        run: |
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ secrets.REGISTRY_URL }} \
+            -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+
+      - name: Build, tag and push container
+        id: build-image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: .github/workflows/Dockerfile
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:latest
+
+#      - name: Trigger Dokploy Deployment
+#        run: |
+#          curl -X POST \
+#            '${{ env.DOKPLOY_URL }}/api/application.deploy' \
+#            -H 'accept: application/json' \
+#            -H 'Content-Type: application/json' \
+#            -H "x-api-key: ${{ secrets.DOKPLOY_SECRET_KEY }}" \
+#            -d '{
+#              "applicationId": "FxH_Bqo0PlhLIy2VsFEeg"
+#            }'
