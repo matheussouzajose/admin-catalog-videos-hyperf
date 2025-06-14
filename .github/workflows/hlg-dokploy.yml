@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 env:
-  DOKPLOY_URL: "https://dokploy.msjtech.me/"
+  DOKPLOY_URL: "https://dokploy.msjtech.me"
   IMAGE: "registry.msjtech.me/app-admin-catalog-video"
 
 jobs:
