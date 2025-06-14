@@ -22,6 +22,7 @@ class IndexController extends AbstractController
         return [
             'method' => $method,
             'message' => "Hello 2 {$user}.",
+            'deploy' => true,
         ];
     }
 }
