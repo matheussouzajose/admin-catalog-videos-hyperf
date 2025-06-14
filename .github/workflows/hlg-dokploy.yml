@@ -38,13 +38,13 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:latest
 
-#      - name: Trigger Dokploy Deployment
-#        run: |
-#          curl -X POST \
-#            '${{ env.DOKPLOY_URL }}/api/application.deploy' \
-#            -H 'accept: application/json' \
-#            -H 'Content-Type: application/json' \
-#            -H "x-api-key: ${{ secrets.DOKPLOY_SECRET_KEY }}" \
-#            -d '{
-#              "applicationId": "FxH_Bqo0PlhLIy2VsFEeg"
-#            }'
+      - name: Trigger Dokploy Deployment
+        run: |
+          curl -X POST \
+            '${{ env.DOKPLOY_URL }}/api/application.deploy' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H "x-api-key: ${{ secrets.DOKPLOY_SECRET_KEY }}" \
+            -d '{
+              "applicationId": "LuB5WsazC5iAh94ShWmr2"
+            }'
